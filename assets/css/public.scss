@@ -1,0 +1,76 @@
+// 生成 fs-12 ，fs-14 ... fs-36
+$font-size:12;
+@while $font-size <= 36 {
+	.fs-#{$font-size} {
+		font-size: #{$font-size}rpx;
+	}
+	$font-size: $font-size + 2;
+}
+
+// 通用的颜色
+.color-white{
+  color: white;
+}
+.color-success{
+  color:#67C23A;
+}
+.color-warning{
+  color:#C99300;
+}
+.color-primary{
+  color:#036DB7;
+}
+
+// 文本色
+// 危险色
+.color-danger{
+  color:#FF3933;
+}
+// 黑
+.color-title{
+  color: #071227;
+}
+// 文本色
+.color-text{
+	color: #2F2F2F;
+}
+// 次级文本
+.color-text-secondary{
+	color: #656565;
+}
+// 文本灰
+.color-gray{
+	color: #848484;
+}
+// 文本次级灰
+.color-light-gray{
+	color: #ADAFBB;
+}
+// 背景色
+// 危险色
+.bg-danger{
+	background: #F16355;
+}
+.bg-primary{
+	background-color: #036EB7;
+	// &.disabled{
+	// 	background-color: rgba(#036EB7,.7);
+	// }
+}
+.bg-white {
+  background: #fff!important;
+}
+.bg-black{
+  background: #000000;
+}
+// 背景灰
+.bg-gray{
+  background: #F5F5F5;
+}
+
+$position-list: top,bottom,right,left;
+@each $pos in $position-list {
+	.line-#{$pos}{
+		@include border-1px($pos)
+	}
+}

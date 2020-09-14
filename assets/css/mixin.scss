@@ -1,0 +1,143 @@
+//绝对定位布局（固定宽高）
+@mixin abs($position) {
+  position: absolute;
+  @if $position==vertical {
+    //垂直居中
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+  } @else if $position==center {
+    //水平垂直居中
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  } @else if $position==horizontal {
+    //水平居中
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  } @else if $position==bottom { // 常用固定底部或头部条
+    bottom: 0;
+    width: 100%;
+  } @else if $position==top{
+    top: 0;
+    width: 100%;
+  }
+}
+//绝对定位布局2（未知宽高translate）
+@mixin abs_trans($position) {
+  position: absolute;
+  @if $position==vertical {
+    //垂直居中
+    top: 50%;
+    transform: translate(0, -50%);
+  } @else if $position==center {
+    //水平垂直居中
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } @else if $position==horizontal {
+    //水平居中
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+
+// flex
+// 主轴排列 设置主轴对齐方式
+@mixin flexMainAlign($position) {
+  display: flex;
+  align-items: flex-start;
+  // 交叉轴居中
+  &.cross-center {
+    align-items: center;
+  }
+  // 交叉轴居底
+  &.cross-end {
+    align-items: flex-end;
+  }
+  // 交叉轴拉伸
+  &.cross-stretch {
+    align-items: stretch;
+  }
+  @if $position==start {
+    //左对齐
+    justify-content: flex-start;
+  } @else if $position==end {
+    //右对齐
+    justify-content: flex-end;
+  } @else if $position==center {
+    //居中对齐
+    justify-content: center;
+  } @else if $position==around {
+    //等距对齐，边距不会合并
+    justify-content: space-around;
+  } @else if $position==evenly {
+    //等距对齐，边距会合并
+    justify-content: space-evenly;
+  } @else if $position==between {
+    //两端对齐
+    justify-content: space-between;
+  }
+}
+// 交叉轴排列 设置交叉轴对齐方式
+@mixin flexCrossAlign($position) {
+  display: flex;
+  justify-content: flex-start;
+  &.main-center {
+    justify-content: center;
+  }
+  &.main-end {
+    justify-content: flex-end;
+  }
+  &.main-between {
+    justify-content: space-between;
+  }
+  @if $position==start {
+    //顶对齐
+    align-items: flex-start;
+  } @else if $position==end {
+    //底对齐
+    align-items: flex-end;
+  } @else if $position==center {
+    //垂直居中
+    align-items: center;
+  } @else if $position==baseline {
+    //项目文字基线对齐
+    align-items: baseline;
+  } @else if $position==stretch {
+    //纵向拉伸对齐
+    align-items: stretch;
+  }
+}
+
+@mixin border-1px($position:top,$color:#F5F5F5) {
+    position: relative;
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+		border-#{$position}: 1px solid $color;
+		#{$position}: 0;
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio:2),
+(min-device-pixel-ratio: 2) {
+    .border-1px &::after {
+        -webkit-transform: scaleY(1/2); //像素比为2的时候，我们设置缩放为0.5
+        transform: scaleY(1/2);
+    }
+}
+@media (-webkit-min-device-pixel-ratio:3),
+(min-device-pixel-ratio: 3) {
+    .border-1px &::after {
+        -webkit-transform: scaleY(1/3);//像素比为3的时候，我们设置缩放为0.33333
+        transform: scaleY(1/3);
+    }
+}

@@ -1,0 +1,66 @@
+// flex 布局相关
+.flex-main-end {
+  @include flexMainAlign(end);
+}
+.flex-main-start {
+  @include flexMainAlign(start);
+}
+.flex-main-around {
+  @include flexMainAlign(around);
+}
+.flex-main-evenly {
+  // 微信内置浏览器不支持，ie内核不支持
+  @include flexMainAlign(evenly);
+}
+.flex-main-center {
+  @include flexMainAlign(center);
+}
+.flex-main-between {
+  @include flexMainAlign(between);
+}
+.flex-cross-end {
+  @include flexCrossAlign(end);
+}
+.flex-cross-baseline {
+  @include flexCrossAlign(baseline);
+}
+.flex-cross-stretch {
+  @include flexCrossAlign(stretch);
+}
+.flex-cross-start {
+  @include flexCrossAlign(start);
+}
+.flex-cross-center {
+  @include flexCrossAlign(center);
+}
+// 主轴交叉轴都居中
+.flex-mc-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex {
+  display: flex;
+}
+.flex-none {
+  //不自动缩放
+  flex: none;
+}
+.flex-1 {
+  flex: 1;
+}
+.flex-auto {
+  flex: auto;
+}
+.flex-wrap {
+  //设置换行
+  flex-wrap: wrap;
+}
+.flex-column {
+  //修改主轴方向为垂直方向
+  flex-direction: column;
+}
+.flex-self-stretch {
+  //项缩放占满交叉轴空间
+  align-self: stretch;
+}
