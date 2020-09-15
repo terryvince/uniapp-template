@@ -16,3 +16,28 @@
 .txt-delete{
 	text-decoration:line-through;
 }
+
+// 多行省略（不要设padding，用margin代替，padding会导致溢出部分可见）
+.txt-ellipsis{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	&.row-1{
+		// white-space: nowrap;
+		-webkit-line-clamp: 1;
+	}
+	&.row-2{
+		word-break: break-all;
+		-webkit-line-clamp: 2;
+	}
+	&.row-3{
+		word-break: break-all;
+		-webkit-line-clamp: 3;
+	}
+}
+// 严格换行，英文长单词会被截断
+.txt-wrap{
+	word-break: break-all;
+}

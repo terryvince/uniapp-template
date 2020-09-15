@@ -1,1 +1,21 @@
-$color-gray: #ccc ;
+// 颜色规范
+// 边线
+$color-line: #F2F6FC; // 1px细线颜色
+$color-border:#E4E7ED; // border颜色
+
+// 颜色
+$color-primary: #409EFF; // 主题色
+$color-sucess: #67C23A;
+$color-warning:#E6A23C;
+$color-danger:#F56C6C;
+$color-info:#909399;
+
+$color-background: #f5f5f5; // 页面背景色
+
+// 文本色
+$color-title: #303133; // 标题
+$color-text: #303133; // 主要文字
+$color-text-sub:#606266; // 副文本
+$color-text-secondary:#909399; // 次要文字
+$color-text-gary:#C0C4CC; // 灰色文本
+$color-link: #036DB7; // 链接色

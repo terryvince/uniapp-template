@@ -1,9 +1,34 @@
 <template>
 	<view class="content">
 		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
+		<view class="text-area flex-wrap">
 			<text class="title">{{title+env}}</text>
-			<text class="test-px fs-48 line-bottom">测试px</text>
+			<text class="test-px line-bottom">测试px</text>
+			<view class="rect bg-primary top-30 flex-center padding-beside-20">
+				<text class="color-white fs-32 txt-ellipsis row-2">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore sequi voluptates dolorem obcaecati accusantium pariatur corrupti accusamus earum fuga nostrum? Et iure doloremque labore doloribus nesciunt aut! Modi sequi optio.
+				</text>
+			</view>
+			<view class="flex-center width-full top-30">
+				<checkbox-group name="">
+					<label>
+						<checkbox value="1" /><text>hello</text>
+					</label>
+					<label class="left-10">
+						<checkbox value="2" /><text>hello1</text>
+					</label>
+				</checkbox-group>
+			</view>
+			<view class="flex-center width-full top-30">
+				<radio-group name="">
+					<label>
+						<radio value="1" /><text>hello</text>
+					</label>
+					<label class="left-10">
+						<radio value="2" /><text>hello1</text>
+					</label>
+				</radio-group>
+			</view>
 		</view>
 	</view>
 </template>
@@ -29,8 +54,13 @@
 </script>
 
 <style lang="scss">
+	.rect{
+		width: 300rpx;
+		height: 300rpx;
+	}
 	.test-px{
-		color: $color-gray;
+		font-size: 16px;
+		color: $color-text-gary;
 	}
 	.content {
 		display: flex;

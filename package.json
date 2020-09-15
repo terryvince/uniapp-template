@@ -8,11 +8,14 @@
   },
   "main": "main.js",
   "devDependencies": {
-    "dayjs": "^1.8.35",
-    "qs": "^6.9.4"
+    "css-x2x-loader": "^0.1.2"
   },
   "keywords": [
     "stray"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dayjs": "^1.8.35",
+    "qs": "^6.9.4"
+  }
 }

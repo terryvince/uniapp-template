@@ -154,3 +154,13 @@
 .z-index-99 {
   z-index: 99;
 }
+// 不可见铺满占位，用于某些功能必须用户交互才能触发的替换
+.hide-full{
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	opacity: 0;
+	z-index: 99;
+}

@@ -115,14 +115,14 @@
   }
 }
 
-@mixin border-1px($position:top,$color:#F5F5F5) {
+@mixin border-1px($position:top,$border-color:$color-border) {
     position: relative;
     &::after {
         content: '';
         display: block;
         position: absolute;
         width: 100%;
-		border-#{$position}: 1px solid $color;
+		border-#{$position}: 1px solid $border-color;
 		#{$position}: 0;
     }
 }

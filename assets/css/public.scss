@@ -7,70 +7,118 @@ $font-size:12;
 	$font-size: $font-size + 2;
 }
 
-// 通用的颜色
-.color-white{
-  color: white;
+// 生成单边距 10 - 30，5递增，left-10，left-15... 
+$spacing:10;
+@while $spacing <= 30 {
+	.left-#{$spacing} {
+		margin-left: #{$spacing}rpx;
+	}
+	.right-#{$spacing} {
+		margin-right: #{$spacing}rpx;
+	}
+	.top-#{$spacing} {
+		margin-top: #{$spacing}rpx;
+	}
+	.bottom-#{$spacing} {
+		margin-bottom: #{$spacing}rpx;
+	}
+	$spacing: $spacing + 5;
 }
-.color-success{
-  color:#67C23A;
+
+// 生成双边或全边内外边距
+$space-between:10;
+@while $space-between <= 30 {
+	// 两边内外边距，10-30 10递增 margin-beside-10 margin-beside-20 ...
+	.margin-beside-#{$space-between} {
+		margin: 0 #{$space-between}rpx;
+	}
+	.padding-beside-#{$space-between} {
+		padding: 0 #{$space-between}rpx;
+	}
+	// 内外全边距10-30，10递增 padding-10 padding-20
+	.padding-#{$space-between} {
+		padding: #{$space-between}rpx;
+	}
+	.margin-#{$space-between} {
+		margin: #{$space-between}rpx;
+	}
+	$space-between: $space-between + 10;
 }
-.color-warning{
-  color:#C99300;
-}
-.color-primary{
-  color:#036DB7;
+
+// 文本及背景通用色
+$color-map:(
+	white:#ffffff,
+	black:#000000,
+	success:$color-sucess,
+	warning:$color-warning,
+	primary:$color-primary,
+	danger:$color-danger,
+);
+// 生成map里所有前景色及背景色，如 color-white和bg-white
+@each $key, $value in $color-map {
+	.color-#{$key}{
+		color: $value;
+	}
+	.bg-#{$key}{
+		background-color: $value;
+	}
 }
 
 // 文本色
-// 危险色
-.color-danger{
-  color:#FF3933;
-}
 // 黑
 .color-title{
-  color: #071227;
+  color: $color-title;
 }
 // 文本色
 .color-text{
-	color: #2F2F2F;
+	color: $color-text;
+}
+// 副文本
+.color-text-sub{
+	color: $color-text-sub;
 }
 // 次级文本
 .color-text-secondary{
-	color: #656565;
+	color: $color-text-secondary;
 }
 // 文本灰
 .color-gray{
-	color: #848484;
+	color: $color-text-gary;
 }
-// 文本次级灰
-.color-light-gray{
-	color: #ADAFBB;
+.color-link{
+	color: $color-link;
 }
-// 背景色
-// 危险色
-.bg-danger{
-	background: #F16355;
-}
-.bg-primary{
-	background-color: #036EB7;
-	// &.disabled{
-	// 	background-color: rgba(#036EB7,.7);
-	// }
-}
-.bg-white {
-  background: #fff!important;
-}
-.bg-black{
-  background: #000000;
-}
+// 背景色拓展
 // 背景灰
 .bg-gray{
-  background: #F5F5F5;
+  background: $color-background;
 }
 
+// 生成 line-top line-bottom等1px细线
 $position-list: top,bottom,right,left;
 @each $pos in $position-list {
 	.line-#{$pos}{
 		@include border-1px($pos)
+	}
+}
+
+// 角标
+.badge{
+	display: inline-block;
+	&.badge-mini{
+		padding: 6rpx 20rpx;
+		font-size: 20rpx;
+	}
+	&.badge-defalut{
+		color: #656565;
+		background: #F9F9F9;
+	}
+}
+// .row col-1 col-2 ... col-24 , 栅格布局，等分24份
+@for $value from 1 through 24 {
+	.row{
+		.col-#{$value}{
+			width: $value/24*100%;
+		}
 	}
 }
