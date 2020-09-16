@@ -13,19 +13,19 @@ module.exports = {
 	      }
 	    }
 	  },
-	  configureWebpack: (config) => {
-	      config.module.rules.push({
-	        test: /(\.scss)|(\.css)$/,
-	        use: [{
-	          loader: 'css-x2x-loader',
-	          options: {
-				type: 'px2rpx',
-				tagUnit: 75,
-				tagPrecision: 8
-			  }
-	        }]
-	      })
-	    },
+	  // configureWebpack: (config) => {
+	  //     config.module.rules.push({
+	  //       test: /(\.scss)|(\.css)$/,
+	  //       use: [{
+	  //         loader: 'css-x2x-loader',
+	  //         options: {
+			// 	type: 'px2rpx',
+			// 	tagUnit: 1, // 1px=1rpx
+			// 	tagPrecision: 8 //精度,小数点
+			//   }
+	  //       }]
+	  //     })
+	  //   },
 		// chainWebpack: config => {
 		//         const oneOfsMap = config.module.rule('scss').oneOfs.store
 		//         oneOfsMap.forEach(item => {

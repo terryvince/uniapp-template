@@ -1,4 +1,6 @@
 // flex 布局相关
+
+
 .flex-main-end {
   @include flexMainAlign(end);
 }
@@ -69,4 +71,59 @@
 .flex-self-stretch {
   //项缩放占满交叉轴空间
   align-self: stretch;
+}
+
+// .row col-1 col-2 ... col-24 , 栅格布局，等分24份
+.row{
+	display: flex;
+	width: 100%;
+	flex-wrap: wrap;  // 默认换行
+	
+	// 主轴对齐方式（水平）
+	&.main-start{
+		justify-content: flex-start; // 左对齐
+	}
+	&.main-end{
+		justify-content: flex-end;	// 右对齐
+	}
+	&.main-center{
+		justify-content: center; // 居中对齐
+	}
+	&.main-between{
+		justify-content: space-between; // 两端对齐
+	}
+	// 交叉轴对齐方式（纵向）
+	&.cross-top{
+		align-items: flex-start;  //上对齐
+	}
+	&.cross-center{
+		align-items: flex-end; //中
+	}
+	&.cross-bottom{
+		align-items: center; // 下对齐
+	}
+	// 不换行
+	&.no-wrap{
+		flex-wrap: nowrap;
+	}
+	@for $value from 1 through 24 { // col-1 col-2 ... col-24
+		.col-#{$value}{
+			width: $value/24*100%;
+		}
+		.offset-#{$value}{ // offset-1 offset-2 ... offset-24
+			margin-left: $value/24*100%;
+		}
+		
+	}
+	// 间距
+	&.gutter-15{
+		> [class*=col-]{
+			padding: 0 15rpx;
+		}
+	}
+	&.gutter-30{
+		> [class*=col-]{
+			padding: 0 30rpx;
+		}
+	}
 }

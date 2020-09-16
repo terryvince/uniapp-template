@@ -94,7 +94,7 @@ $color-map:(
   background: $color-background;
 }
 
-// 生成 line-top line-bottom等1px细线
+// 生成 line-top line-bottom等1rpx细线
 $position-list: top,bottom,right,left;
 @each $pos in $position-list {
 	.line-#{$pos}{
@@ -114,11 +114,13 @@ $position-list: top,bottom,right,left;
 		background: #F9F9F9;
 	}
 }
-// .row col-1 col-2 ... col-24 , 栅格布局，等分24份
-@for $value from 1 through 24 {
-	.row{
-		.col-#{$value}{
-			width: $value/24*100%;
-		}
-	}
-}
+
+// 布局相关
+$color-map:(
+	white:#ffffff,
+	black:#000000,
+	success:$color-sucess,
+	warning:$color-warning,
+	primary:$color-primary,
+	danger:$color-danger,
+);

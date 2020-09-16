@@ -1,6 +1,7 @@
 // reset 样式可以写在这里
 view,cover-view{
 	box-sizing: border-box;
+	word-break: break-all;
 }
 
 // checkbox radio 默认跟随主题色
