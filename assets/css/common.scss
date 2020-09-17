@@ -1,4 +1,11 @@
 // 通用样式库 每个项目都可用，使用频率较高的类
+// 暗黑主题
+.theme-dark{
+	filter: invert(1) hue-rotate(180deg);
+	img,image{
+		filter: invert(1) hue-rotate(180deg);
+	}
+}
 // 浮动
 .pull-left {
   float: left;

@@ -3,6 +3,10 @@ view,cover-view{
 	box-sizing: border-box;
 	word-break: break-all;
 }
+page{
+	font-size: 28rpx;
+	color: $color-text;
+}
 
 // checkbox radio 默认跟随主题色
 

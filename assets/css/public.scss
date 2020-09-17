@@ -102,6 +102,12 @@ $position-list: top,bottom,right,left;
 	}
 }
 
+// 内容块
+.content-block{
+	margin-top: $module-spacing;
+	padding:0 $content-spacing $content-spacing;
+}
+
 // 角标
 .badge{
 	display: inline-block;
@@ -114,13 +120,3 @@ $position-list: top,bottom,right,left;
 		background: #F9F9F9;
 	}
 }
-
-// 布局相关
-$color-map:(
-	white:#ffffff,
-	black:#000000,
-	success:$color-sucess,
-	warning:$color-warning,
-	primary:$color-primary,
-	danger:$color-danger,
-);

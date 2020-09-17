@@ -117,13 +117,20 @@
 	}
 	// 间距
 	&.gutter-15{
-		> [class*=col-]{
-			padding: 0 15rpx;
+		// > [class*=col-]{ // 该写法不兼容小程序
+		// 	padding: 0 15rpx;
+		// }
+		@for $value from 1 through 24 {
+			.col-#{$value}{
+				padding: 0 15rpx;
+			}
 		}
 	}
 	&.gutter-30{
-		> [class*=col-]{
-			padding: 0 30rpx;
+		@for $value from 1 through 24 {
+			.col-#{$value}{
+				padding: 0 30rpx;
+			}
 		}
 	}
 }
