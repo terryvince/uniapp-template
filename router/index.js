@@ -5,7 +5,7 @@ Vue.use(Router)
 
 const router = new Router();
 
-router.beforeEach((to,from,next)=>{
+router.beforeEach(async (to,from,next)=>{
   console.log('路由前置钩子拦截：',to,from)
   next()
 })

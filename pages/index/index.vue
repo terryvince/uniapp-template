@@ -120,7 +120,7 @@
 			}
 		},
 		onLoad() {
-			console.log(this)
+			console.log(this.$$router)
 		},
 		methods: {
 			goTest(){

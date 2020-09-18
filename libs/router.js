@@ -1,7 +1,7 @@
 import qs from 'qs'
 /** Router
  * 属性：
- * _route 存当前路由，{path:'',query:{}}
+ * _route 存当前路由，{path:'',fullPath:'',query:{}}
  * 方法：
  * push 跳转，类似vue-router的push，但只有两个参数push(path || {path:'',query:{}})
  * repalce 替换当前页面栈，参数同push
@@ -13,7 +13,7 @@ import qs from 'qs'
  * */
 function Router(option){
 	this._option = option || {}  // 暂时没用到，先保留起选项
-	this._route = {path:'',query:{}}
+	this._route = {path:'',fullPath:'',query:{}}
 	this._beforeHook = function(){}
 	this._afterHook = function(){}
 	
@@ -35,19 +35,11 @@ Router.install = function(Vue,option){
 	  Vue.mixin({
 		  beforeCreate(){
 			  if(this.$options.myRouter){
-				  this.$$router = this.$options.myRouter
-				  Vue.util.defineReactive(this, '$$route', this.$$router._route)
+				  Vue.prototype.$$router = this.$options.myRouter
+				  Vue.prototype.$$route = this.$options.myRouter._route
 			  }	
 		  }
 	  })
-	  
-	  Object.defineProperty(Vue.prototype, '$$router', {
-	      get () { return this.$root.$$router }
-	    })
-	  
-	    Object.defineProperty(Vue.prototype, '$$route', {
-	      get () { return this.$root.$$route }
-	    })
 }
 
 Router.prototype.beforeEach = function(cb){
@@ -153,7 +145,8 @@ export function getRoute(){
 	const page = pages[pages.length - 1];
 	return page ? {       // 防止vue挂载初始化的时候报错
 		path: page.route,
-		query: page.options
+		query: page.options,
+		fullPath: Object.keys(page.options).length ? `${page.route}?${qs.stringify(page.options)}` : page.route
 	}: {}
 }
 
