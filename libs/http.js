@@ -24,8 +24,8 @@ const fly = new Fly
 fly.config.timeout=60*1000;
 //设置请求基地址
 fly.config.baseURL= process.my_env.STRAY_BASE_API
-// 跨域时发送cookie
-fly.config.withCredentials = true
+// 跨域时发送cookie，需要后端设置Access-Control-Allow-Origin为你的源地址 Access-Control-Allow-Credentials: true，允许携带cookie
+// fly.config.withCredentials = true
 //设置公共的Get参数
 // fly.config.params={"token":"testtoken"};
 

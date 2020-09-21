@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 
+// 读取pages.json 给路由使用
 function readPages() {
     const path = require('path');
     const fs = require('fs');
