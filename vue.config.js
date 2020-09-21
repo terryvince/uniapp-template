@@ -1,4 +1,14 @@
-// const transform = require('postcss-pxtransform')
+const webpack = require('webpack')
+
+function readPages() {
+    const path = require('path');
+    const fs = require('fs');
+    const pagesPath = path.join(__dirname, './pages.json')
+    if (!fs.existsSync(pagesPath)) {
+        throw new Error(pagesPath + ' 不存在!')
+    }
+    return fs.readFileSync(pagesPath, 'utf8')
+}
 
 module.exports = {
 	// 自动导入全局,让后续所有vue文件不需要import就能使用
@@ -13,6 +23,14 @@ module.exports = {
 	      }
 	    }
 	  },
+	  configureWebpack: {
+	          plugins: [
+	              // new BundleAnalyzerPlugin(),
+	              new webpack.DefinePlugin({  // 设置webpack全局变量，读取pages.json
+	                  PAGES_JSON: JSON.stringify(readPages())
+	              })
+	          ]
+	      }
 	  // configureWebpack: (config) => {
 	  //     config.module.rules.push({
 	  //       test: /(\.scss)|(\.css)$/,

@@ -6,8 +6,13 @@ Vue.use(Router)
 const router = new Router();
 
 router.beforeEach(async (to,from,next)=>{
-  console.log('路由前置钩子拦截：',to,from)
-  next()
+  // console.log('路由前置钩子拦截：',to,from)
+  next({
+	  path:'/pages/test/test',
+	  query:{
+		  hello:'11',
+	  }
+  })
 })
 
 router.afterEach((to,from)=>{

@@ -12,10 +12,20 @@ import qs from 'qs'
  * afterEach 路由后置钩子
  * */
 function Router(option){
-	this._option = option || {}  // 暂时没用到，先保留起选项
+	this._option = option || {}  // 目前只有tabs选项，用于判断是否是选项卡
 	this._route = {path:'',fullPath:'',query:{}}
+	this._pages = [];
 	this._beforeHook = function(){}
 	this._afterHook = function(){}
+	
+	if(PAGES_JSON){
+		try{
+			const pages = JSON.parse(PAGES_JSON.replace(/\/\*[\s\S]*\*\/|\/\/.*/g,'')) // 读取pages.json
+			this._option.tabs = pages.tabBar ? pages.tabBar.list.map(page => ({path:page.pagePath})) : []
+		} catch(err){
+			console.error('pages.json 解析错误!')
+		}
+	}
 	
 	Object.defineProperty(this,'_route',{
 			get(){
@@ -23,6 +33,14 @@ function Router(option){
 			},
 			set(newValue){
 				this._route = newValue
+			}
+		})
+	Object.defineProperty(this,'_pages',{
+			get(){
+				return getPages()
+			},
+			set(newValue){
+				this._pages = newValue
 			}
 		})
 }
@@ -57,13 +75,13 @@ Router.prototype.afterEach = function(cb){
 const apiMap = {
 	push:'navigateTo',
 	replace:'redirectTo',
+	back:'navigateBack',
 	reLaunch:'reLaunch',
-	switchTab:'switchTab',
-	back:'navigateBack'
+	switchTab:'switchTab'
 }
 
 Object.keys(apiMap).map(key=>{
-	const api = apiMap[key]
+	let api = apiMap[key]
 	if(key == 'back'){
 		Router.prototype.back = async function(number=1){
 			return new Promise((resolve,reject)=>{
@@ -82,14 +100,34 @@ Object.keys(apiMap).map(key=>{
 		}
 		return
 	}
-	Router.prototype[key] = async function(location){
+	Router.prototype[key] = async function jump(location){
 		const params = parseParams(location)
 		const to = parseRoute(location)
 		const from = this._route
 		const that = this
 		let path = await this._beforeHook(to,from)   // 等待前置钩子执行完成
-		if(path){
-			this.push(path)
+		let isTab = this._option.tabs.some(page=>page.path.includes(to.path))
+		if( isTab && (key == 'push' || key == 'replace')){ // 如果是选项卡直接切换switchTab来跳转
+			api = 'switchTab'
+		}
+		if(this._pages.length > 10){ // 小程序最大历史记录栈限制10
+			console.warn('ROUTER WARNING: 小程序的最大页面栈限制是10层，请注意清空页面栈。')
+			return
+		}
+		if(!this._funCount)  // 指定时间重置一次调用频次记录
+		{
+			this._funCount = 0
+			setTimeout(()=>{
+				this._funCount = 0
+			},500)
+		}
+		this._funCount++
+		if(this._funCount>255){  // 如果500毫秒内跳转了255次以上，则判定为无限跳转
+			throw new Error('\n ROUTER ERROR: 存在无限调用路由跳转，这可能是由于拦截器使用不当造成的。')
+			return
+		}
+		if(path){ // next中含有路径跳转时
+			jump.call(this,path)
 			return
 		}
 		return new Promise((resolve,reject)=>{
@@ -148,6 +186,16 @@ export function getRoute(){
 		query: page.options,
 		fullPath: Object.keys(page.options).length ? `${page.route}?${qs.stringify(page.options)}` : page.route
 	}: {}
+}
+
+// 获取页面记录栈
+export function getPages(){
+	const pages = getCurrentPages().map(page=>({
+		path: page.route,
+		query: page.options,
+		fullPath: Object.keys(page.options).length ? `${page.route}?${qs.stringify(page.options)}` : page.route
+	}));
+	return pages
 }
 
 export default Router
