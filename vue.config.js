@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const path = require('path')
 
 // 读取pages.json 给路由使用
 function readPages() {
@@ -29,7 +30,11 @@ module.exports = {
 	              // new BundleAnalyzerPlugin(),
 	              new webpack.DefinePlugin({  // 设置webpack全局变量，读取pages.json
 	                  PAGES_JSON: JSON.stringify(readPages())
-	              })
+	              }),
+				  new webpack.ProvidePlugin({
+				          to: [path.resolve(__dirname,'libs/to.js'),'default'], // 自动导入to.js
+						  storage: [path.resolve(__dirname,'libs/storage.js'),'default']
+				      })
 	          ]
 	      }
 	  // configureWebpack: (config) => {

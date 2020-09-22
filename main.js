@@ -10,6 +10,7 @@ App.mpType = 'app'
 Vue.use(myPlugin)
 
 Vue.prototype.$store = store
+
 const app = new Vue({
     ...App,
 	myRouter,

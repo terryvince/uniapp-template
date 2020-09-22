@@ -83,7 +83,7 @@ export function deepClone(ob) {
  * @example objectMap({a:1,b:2,c:3},{b:'映射b'}) => {a:1,b:2,映射b:2,c:3}
  * @return {object}
  */
-const querySelector = (selector) => new Promise((resolve, reject) => {
+export const querySelector = (selector) => new Promise((resolve, reject) => {
 	const query = uni.createSelectorQuery();
 	query.select(selector).boundingClientRect(data => {
 		resolve(data)
@@ -97,7 +97,7 @@ const querySelector = (selector) => new Promise((resolve, reject) => {
  * @example objectMap({a:1,b:2,c:3},{b:'映射b'}) => {a:1,b:2,映射b:2,c:3}
  * @return {object}
  */
-const objectMap = (origin, map, isKeepOldKey = true) => {
+export const objectMap = (origin, map, isKeepOldKey = true) => {
 	if (type(origin) !== 'object' || type(map) !== 'object') {
 	  throw new Error('utils.objectMap: 参数错误')
 	}
@@ -115,7 +115,7 @@ const objectMap = (origin, map, isKeepOldKey = true) => {
 	return target
 }
 
-export {
+export default {
 	type,
 	deepFilter,
 	removeRepeat,

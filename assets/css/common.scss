@@ -24,6 +24,17 @@
 .over-hide {
   overflow: hidden;
 }
+.clearfix{
+	zoom:1;
+	&::after{
+		content:'';
+		display:block;
+		clear:both;
+		height:0; 
+		overflow:hidden;
+		visibility:hidden;
+	}
+}
 // 显隐（不保留布局）
 .show {
   display: block !important;

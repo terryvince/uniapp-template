@@ -35,9 +35,23 @@
 	.rect-list view{
 		border-radius: 10rpx;
 	}
+	.size{
+		width: 200rpx;
+		height: 200rpx;
+	}
 </style>
 <template>
 	<view class="content">
+			<view class="content-block">
+				<view class="width-full">
+					<view class="size pull-left bg-danger txt-center color-white">
+						浮动元素
+					</view>
+					<view class="size bg-primary txt-center color-white" style="clear: both;">
+						hello
+					</view>
+				</view>
+			</view>
 			<view class="content-block">
 				<view class="txt-bold fs-32">hello</view>
 				<view class="top-10 lh-1_8 color-text-sub">
@@ -120,11 +134,15 @@
 			}
 		},
 		onLoad() {
-			console.log(this.$$router)
+			// storage.set({
+			// 	key:'hello',
+			// 	data:'sdfdsga',
+			// 	expire: '2019/10/09 10:00:00'
+			// })
+			console.log(this.$$router,this)
 		},
 		methods: {
 			goTest(){
-				console.log(this.$$router)
 				this.$$router.push({
 					path:'/pages/test/test',
 					query:{

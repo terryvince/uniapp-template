@@ -80,6 +80,10 @@
 	flex-wrap: wrap;  // 默认换行
 	
 	// 主轴对齐方式（水平）
+	&.row-center{
+		justify-content: center;
+		align-items: center;
+	}
 	&.main-start{
 		justify-content: flex-start; // 左对齐
 	}
