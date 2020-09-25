@@ -1,7 +1,13 @@
 import qs from 'qs'
+import Print from '../utils/log.js'
+const {log,error,warn}  = Print({
+	prepend:'ROUTER',
+	style:'success'
+})
 /** Router
  * 属性：
  * _route 存当前路由，{path:'',fullPath:'',query:{}}
+ * _pages 存储历史记录页面栈
  * 方法：
  * push 跳转，类似vue-router的push，但只有两个参数push(path || {path:'',query:{}})
  * repalce 替换当前页面栈，参数同push
@@ -12,6 +18,7 @@ import qs from 'qs'
  * afterEach 路由后置钩子
  * */
 function Router(option){
+	log('路由初始化...')
 	this._option = option || {}  // 目前只有tabs选项，用于判断是否是选项卡
 	this._route = {path:'',fullPath:'',query:{}}
 	this._pages = [];
@@ -23,7 +30,7 @@ function Router(option){
 			const pages = JSON.parse(PAGES_JSON.replace(/\/\*[\s\S]*\*\/|\/\/.*/g,'')) // 读取pages.json
 			this._option.tabs = pages.tabBar ? pages.tabBar.list.map(page => ({path:page.pagePath})) : []
 		} catch(err){
-			console.error('pages.json 解析错误!')
+			warn('你没有在pages.json中设置tabs选项，将默认读取router的构造参数tabs选项')
 		}
 	}
 	
@@ -55,6 +62,7 @@ Router.install = function(Vue,option){
 			  if(this.$options.myRouter){
 				  Vue.prototype.$$router = this.$options.myRouter
 				  Vue.prototype.$$route = this.$options.myRouter._route
+				  log('路由系统安装成功...')
 			  }	
 		  }
 	  })
@@ -69,7 +77,9 @@ Router.prototype.beforeEach = function(cb){
 }
 
 Router.prototype.afterEach = function(cb){
-	this._afterHook = cb
+	this._afterHook = ()=>{
+		cb()
+	}
 }
 
 const apiMap = {
@@ -95,7 +105,7 @@ Object.keys(apiMap).map(key=>{
 					}
 				})
 			}).catch(err=>{
-				console.error(`路由回退失败`)
+				error(`路由回退失败`)
 			})
 		}
 		return
@@ -111,7 +121,7 @@ Object.keys(apiMap).map(key=>{
 			api = 'switchTab'
 		}
 		if(this._pages.length > 10){ // 小程序最大历史记录栈限制10
-			console.warn('ROUTER WARNING: 小程序的最大页面栈限制是10层，请注意清空页面栈。')
+			warn('小程序的最大页面栈限制是10层，请注意清空页面栈。')
 			return
 		}
 		if(!this._funCount)  // 指定时间重置一次调用频次记录
@@ -130,6 +140,7 @@ Object.keys(apiMap).map(key=>{
 			jump.call(this,path)
 			return
 		}
+		log(`即将导航到${to.path}，携带参数`,to.query)
 		return new Promise((resolve,reject)=>{
 			uni[api]({
 				...params,
@@ -142,7 +153,7 @@ Object.keys(apiMap).map(key=>{
 				}
 			})
 		}).catch(err=>{
-			console.error(`路由${params.url}跳转失败`)
+			error(`路由${params.url}跳转失败`)
 		})
 	}
 })

@@ -1,4 +1,12 @@
 import qs from 'qs'
+import Print from '../utils/log.js'
+const {log,error,warn}  = Print({
+	prepend:'HTTP',
+	style:'primary'
+})
+
+log('请求初始化')
+
 let Fly = null
 // #ifdef H5
 	Fly = require("flyio/dist/npm/fly")
@@ -46,14 +54,15 @@ fly.interceptors.request.use((request)=>{
     //给所有请求添加自定义header
     request.headers["X-Tag"]="flyio";
 	if(request.headers['Content-Type'].includes('x-www-form-urlencoded')){
-		request.params = qs.stringify(request.params)
+		request.body = qs.stringify(request.body)
 	}
+	log(`发送请求\n\t请求地址：${request.url}\n\t请求参数：`,request.body)
 	//终止请求
 	//var err=new Error("xxx")
 	//err.request=request
 	//return Promise.reject(new Error(""))
   	//打印出请求体
-  	console.log(request.body)
+  	// console.log(request.body)
     return request;
 })
 
@@ -66,23 +75,24 @@ fly.interceptors.request.use((request)=>{
 // }
 fly.interceptors.response.use(
     (response) => {
-		console.log('http engine:',response.engine)
+		log(`接受响应\n\t响应地址：${response.request.url}\n\t响应数据：`,response.data)
         //只将请求结果的data字段返回
         return response.data
     },
     (err) => {
         //发生网络错误后会走到这里
 		if(process.env.NODE_ENV=='development'){
-			const msg = typeof err == 'string' ? err : err.message
 			uni.showModal({
 				showCancel:false,
 				title:'错误',
-				content: msg
+				content: err.message
 			})
 		}
-		console.error(`请求接口${err.request.url}出错：`,err)
+		error(`请求发生错误\n\t接口地址：${err.request.baseURL +'/'+ err.request.url}\n\t错误消息：${err.message}`)
         return Promise.reject(err)
     }
 )
+
+log('请求初始化成功！')
 
 export default fly

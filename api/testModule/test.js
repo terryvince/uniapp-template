@@ -5,8 +5,8 @@ const test = (data) => {
 	return http.request('test',data,{
 		method:'get',
 		// headers:{
-		// 		"content-type":"application/x-www-form-urlencoded"},
-		// }
+		// 		"content-type":"application/x-www-form-urlencoded",
+		// },
 		}
 	)
 }

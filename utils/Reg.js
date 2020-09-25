@@ -62,19 +62,19 @@ export {
 		return regExp.validString.test(input)
 	},
 	// qq号
-	isQQ(){
+	isQQ(input){
 		return regExp.qqNumber.test(input)
 	},
 	// ip地址
-	isIp(){
+	isIp(input){
 		return regExp.ip.test(input)
 	},
 	// 非空
-	isNotNull(){
+	isNotNull(input){
 		return regExp.notNull.test(input)
 	},
 	// 域名
-	isUrl(){
+	isUrl(input){
 		return regExp.url.test(input)
 	}
 }

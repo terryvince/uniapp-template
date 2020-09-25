@@ -45,9 +45,9 @@
 			<view class="content-block">
 				<view class="width-full">
 					<view class="size pull-left bg-danger txt-center color-white">
-						浮动元素
+						浮动元素121df111
 					</view>
-					<view class="size bg-primary txt-center color-white" style="clear: both;">
+					<view class="size bg-gray txt-center color-white" style="clear: both;">
 						hello
 					</view>
 				</view>
@@ -133,13 +133,14 @@
 				title: 'Hello'
 			}
 		},
-		onLoad() {
-			// storage.set({
-			// 	key:'hello',
-			// 	data:'sdfdsga',
-			// 	expire: '2019/10/09 10:00:00'
-			// })
-			console.log(this.$$router,this)
+		async onLoad() {
+			// const [err,data] = await to(test({a:1,b:5545}))
+			await storage.set({
+				key:'ghshf13662',
+				data:null,
+				expire: '2019/12/10 10:00:00'
+			})
+			console.log(storage._info.currentSize + 'kb',storage._info.limitSize+'kb')
 		},
 		methods: {
 			goTest(){
