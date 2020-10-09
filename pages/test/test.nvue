@@ -1,0 +1,31 @@
+<template>
+	<view class="row row-center">
+		<text>this is  nvue page</text>
+		<text class="left-10">1111</text>
+		<text class="txt-wrap width-full txt-ellipsis txt-row-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus earum rerum dolore ipsum corporis repellendus velit aliquid laboriosam debitis officia ut cupiditate voluptatem inventore quos dolores placeat sed excepturi modi!</text>
+	</view>
+</template>
+
+<script>
+	import {
+		test
+	} from '../../api/testModule/test.js'
+	import router from '../../router/index.js'
+	// import storage from '../../libs/storage.js'
+	export default {
+		data() {
+			return {
+				
+			};
+		},
+		created(){
+			test({hello:1,b:2})
+			setTimeout(()=>{
+				router.back()
+			},3000)
+		}
+	}
+</script>
+
+<style>
+</style>

@@ -1,6 +1,7 @@
 import filters from './filter.js'
 import mixin from './mixin.js'
 import http from '@/libs/http.js'
+import hxNavbar from "@/components/hx-navbar/hx-navbar"
 // 自定义插件注入全局属性或方法
 export default {
 	install(Vue,options){
@@ -16,6 +17,9 @@ export default {
 		  //   }
 		  //   ...
 		  // })
+		  // 注册自定义导航栏
+		  Vue.component('hx-navbar',hxNavbar)
+		  
 		  // 批量注入过滤器
 		  for(let key in filters){
 			  Vue.filter(key,filters[key])

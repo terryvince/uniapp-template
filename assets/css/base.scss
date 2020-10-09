@@ -1,12 +1,15 @@
 // reset 样式可以写在这里
+/* #ifndef APP-PLUS-NVUE */
 view,cover-view{
 	box-sizing: border-box;
 	word-break: break-all;
 }
+
 page{
 	font-size: 28rpx;
 	color: $color-text;
 }
+/* #endif */
 
 // checkbox radio 默认跟随主题色
 
@@ -27,20 +30,20 @@ page{
 /* #endif */
 
 /*checkbox 选项框大小  */
-uni-checkbox .uni-checkbox-input{ width: 40rpx !important; height: 40rpx !important; }
+.uni-checkbox-input{ width: 40rpx !important; height: 40rpx !important; }
 /*checkbox选中后样式  */
-uni-checkbox .uni-checkbox-input.uni-checkbox-input-checked{ background-color: $color-primary; border-color:$color-primary; }
+.uni-checkbox-input-checked{ background-color: $color-primary !important; border-color:$color-primary !important; }
 /*checkbox选中后图标样式  */
-uni-checkbox .uni-checkbox-input.uni-checkbox-input-checked::before{
-	font-size: 36rpx;
-	color: #fff;
+.uni-checkbox-input-checked::before{
+	font-size: 36rpx !important;
+	color: #fff !important;
 }
 /*radio 选项框大小  */
-uni-radio .uni-radio-input{ width: 40rpx !important; height: 40rpx !important; }
+.uni-radio-input{ width: 40rpx !important; height: 40rpx !important; }
 /*radio选中后样式  */
-uni-radio .uni-radio-input.uni-radio-input-checked{ background-color: $color-primary !important; border-color:$color-primary !important; }
+.uni-radio-input-checked{ background-color: $color-primary !important; border-color:$color-primary !important; }
 /*radio选中后图标样式  */
-uni-radio .uni-radio-input.uni-radio-input-checked::before{
-	font-size: 36rpx;
-	color: #fff;
+.uni-radio-input-checked::before{
+	font-size: 36rpx !important;
+	color: #fff !important;
 }

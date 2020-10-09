@@ -9,12 +9,12 @@ const {log,error,warn}  = Print({
  * _route 存当前路由，{path:'',fullPath:'',query:{}}
  * _pages 存储历史记录页面栈
  * 方法：
- * push 跳转，类似vue-router的push，但只有两个参数push(path || {path:'',query:{}})
+ * push 跳转，类似vue-router的push，但只有两个选项push(path || {path:'',query:{}})
  * repalce 替换当前页面栈，参数同push
  * back(?number) 后退，可传后退几层，默认后退一层
  * reLaunch 重启应用，参数同push
  * switchTab 切换选项卡，参数同push
- * beforeEach 路由前置钩子
+ * beforeEach 路由前置钩子，目前无法拦截第一次进来的页面，由于第一次跳转并不是通过本类的方法跳转，无法监测
  * afterEach 路由后置钩子
  * */
 function Router(option){
@@ -25,12 +25,12 @@ function Router(option){
 	this._beforeHook = function(){}
 	this._afterHook = function(){}
 	
-	if(PAGES_JSON){
+	if(!this._option.tabs){ // nvue环境下，不能读取pages.json的配置，构造函数必须设置tabs选项
 		try{
 			const pages = JSON.parse(PAGES_JSON.replace(/\/\*[\s\S]*\*\/|\/\/.*/g,'')) // 读取pages.json
 			this._option.tabs = pages.tabBar ? pages.tabBar.list.map(page => ({path:page.pagePath})) : []
 		} catch(err){
-			warn('你没有在pages.json中设置tabs选项，将默认读取router的构造参数tabs选项')
+			warn('你没有在pages.json中设置tabs选项，也没有在构造函数中传递tabs选项，将无法智能识别选项卡push跳转')
 		}
 	}
 	

@@ -8,12 +8,14 @@ const colors = {
 
 const log = function(...rest){
 	if(process.env.NODE_ENV=='development'){
-		
 		if(this.option.prepend) rest.unshift(`${this.option.prepend} DEBUG:`)
 		const style = colors[this.option.style] || this.option.style
 		let styles = []
 		// #ifdef APP-PLUS
-			console.log(...rest)
+			let args = rest.map(v=>{
+				return typeof v == 'object' ? JSON.stringify(v,null,2) : v
+			})
+			console.log(...args)
 		// #endif
 		// #ifndef APP-PLUS
 			let args = rest.map(v=>{

@@ -1,5 +1,6 @@
 import qs from 'qs'
 import Print from '../utils/log.js'
+
 const {log,error,warn}  = Print({
 	prepend:'HTTP',
 	style:'primary'
@@ -14,6 +15,7 @@ let Fly = null
 
 // #ifdef APP-NVUE
 	Fly = require("flyio/dist/npm/weex")
+	const process = require('@/envLoader.js').default // nvue 页面模块会重新导入，导致，环境变量丢失，需要重新再加载次
 // #endif
 
 // #ifdef APP-VUE || MP
@@ -36,7 +38,6 @@ fly.config.baseURL= process.my_env.STRAY_BASE_API
 // fly.config.withCredentials = true
 //设置公共的Get参数
 // fly.config.params={"token":"testtoken"};
-
 
 //添加请求拦截器
 // {
@@ -84,8 +85,8 @@ fly.interceptors.response.use(
 		if(process.env.NODE_ENV=='development'){
 			uni.showModal({
 				showCancel:false,
-				title:'错误',
-				content: err.message
+				title:'网络请求错误',
+				content: `错误消息：${err.message}`
 			})
 		}
 		error(`请求发生错误\n\t接口地址：${err.request.baseURL +'/'+ err.request.url}\n\t错误消息：${err.message}`)

@@ -34,6 +34,7 @@ module.exports = {
 				  new webpack.ProvidePlugin({
 				          to: [path.resolve(__dirname,'libs/to.js'),'default'], // 自动导入to.js
 						  storage: [path.resolve(__dirname,'libs/storage.js'),'default']
+						  // process: [path.resolve(__dirname,'envLoader.js'),'default']
 				      })
 	          ]
 	      }

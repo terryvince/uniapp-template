@@ -17,6 +17,7 @@
 	text-decoration:line-through;
 }
 
+/* #ifndef APP-PLUS-NVUE */
 // 多行省略（不要设padding，用margin代替，padding会导致溢出部分可见）
 .txt-ellipsis{
 	display: -webkit-box;
@@ -24,20 +25,35 @@
 	-webkit-line-clamp: 1;
 	overflow: hidden;
 	text-overflow:ellipsis;
-	&.row-1{
+	&.txt-row-1{
 		// white-space: nowrap;
 		-webkit-line-clamp: 1;
 	}
-	&.row-2{
+	&.txt-row-2{
 		word-break: break-all;
 		-webkit-line-clamp: 2;
 	}
-	&.row-3{
+	&.txt-row-3{
 		word-break: break-all;
 		-webkit-line-clamp: 3;
 	}
 }
 // 严格换行，英文长单词会被截断
 .txt-wrap{
+	word-wrap: break-word;
 	word-break: break-all;
 }
+/* #endif */
+
+/* #ifdef APP-PLUS-NVUE */
+	.txt-ellipsis{
+		text-overflow:ellipsis;
+		lines:1;
+	}
+	.txt-row-2{
+		lines:2;
+	}
+	.txt-row-3{
+		lines:3;
+	}
+/* #endif */

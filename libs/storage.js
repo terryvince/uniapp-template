@@ -6,6 +6,7 @@ const {log,error,warn}  = Print({
 	style:'warning'
 })
 /**
+ * 该类已全局导入，可以直接使用无需import，注意nvue环境需要手动导入
  * @param {Object} option  构造函数选项 =>
  *					@param {date} expire 数据过期时间，会在get的时候检查，过期会被删除, 默认30天后过期
  * 					@param {string} scope 作用域，统一给存储的key增加私有前缀，防止h5同域名下，多站点存取冲突

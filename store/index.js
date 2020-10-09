@@ -6,14 +6,39 @@ Vue.use(Vuex)
 // files.keys().forEach(key=>{
 // 	console.log(key)
 // })
+const systemInfo  = uni.getSystemInfoSync()  // ios 还是 andriod
+let host = ''  // 宿主环境，web 小程序 app
+
+// #ifdef H5
+ host = 'web'
+// #endif
+
+// #ifdef MP
+ host = 'mp'
+// #endif
+
+// #ifdef APP-PLUS
+ host = 'app'
+// #endif
 
 const store = new Vuex.Store({
-    state: {
-		test:''
+    state: {   // 全局状态
+		test:'',
+		systemInfo,
+		host
 	},
 	getters:{
 		test(state){
 			return state.test
+		},
+		systemInfo(state){
+			return state.systemInfo
+		},
+		platform(state){
+			return state.systemInfo.platform
+		},
+		host(state){
+			return state.host
 		}
 	},
     mutations: {
@@ -26,7 +51,7 @@ const store = new Vuex.Store({
 			commit('test')
 		}
 	},
-	modules:{
+	modules:{   // 模块状态
 		
 	}
 })

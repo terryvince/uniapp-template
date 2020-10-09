@@ -1,8 +1,24 @@
 <script>
-	require('./envLoader.js')
+	require('./envLoader.js');
 	export default {
 		onLaunch: function() {
-			console.log('App Launch')
+			console.log('App Launch',this)
+			// #ifdef APP-PLUS  
+			const _self = this;  
+			const _handlePush = function(message) {
+				plus.nativeUI.toast('push sucess');  
+				console.log(message)
+				// 处理推送消息 message.payload 为传的参数，可是字符串，可以是对象
+				if(typeof message.payload == 'string'){
+					return
+				}
+				if(message.payload.pagePath){
+					_self.$router.push(message.payload.pagePath)
+				}
+			};  
+			plus.push.addEventListener('click', _handlePush);  
+			plus.push.addEventListener('receive', _handlePush);
+			// #endif
 		},
 		onShow: function() {
 			console.log('App Show')
