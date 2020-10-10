@@ -3,7 +3,8 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				// "navigationBarTitleText": "uni-app",
+				"navigationStyle":"custom"
 			}
 		}
 	    ,{
@@ -12,10 +13,9 @@
         }
     ],
 	"globalStyle": {
-		// "navigationBarTextStyle": "black",
-		// "navigationBarTitleText": "uni-app",
-		// "navigationBarBackgroundColor": "#F8F8F8",
-		"navigationStyle":"custom",
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "流浪地球",
+		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
 		"app-plus":{
 			"scrollIndicator":"none"

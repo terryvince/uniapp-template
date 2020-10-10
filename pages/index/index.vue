@@ -54,7 +54,7 @@
 		<view class="content-block">
 			{{ JSON.stringify(systemInfo,null,4) }}
 		</view> -->
-		<view class="content-block width-full no-margin">
+		<view class="content-block width-full">
 			<view class="container">
 				<view class="size-100">11111</view>
 				<view class="size-100"></view>
@@ -67,7 +67,7 @@
 		</view>
 		<view class="content-block">
 			<view class="size pull-left bg-danger txt-center color-white">
-				浮动元素121df111 {{platform}} {{host}} {{navHeight}}
+				{{platform}} {{host}} {{navHeight}}
 			</view>
 			<view class="size bg-gray txt-center color-white" style="clear: both;">
 				hello
@@ -100,7 +100,7 @@
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 			</view>
 		</view>
-		<image class="logo" src="/static/logo.png"></image>
+		<!-- <image class="logo" src="/static/logo.png"></image> -->
 		<view class="text-area flex-wrap">
 			<view class="rect bg-primary top-30 row row-center padding-beside-20">
 				<text class="color-white fs-32 txt-ellipsis row-2">
@@ -149,6 +149,13 @@
 				<button type="default" @click="goTest()">路由测试</button>
 			</view>
 		</view>
+		<!--  -->
+		<view class="content-block row row-center flex-column">
+			<text>state a/test: {{getTest}}</text>
+			<text class="top-10">state root/test: {{getRootTest}}</text>
+			<button @click="testAction()" type="default" class="top-10">点击改变模块a/test状态</button>
+			<button @click="changeTest()" type="default" class="top-10">点击改变模块root/test状态</button>
+		</view>
 	</view>
 </template>
 
@@ -156,7 +163,7 @@
 	// import {
 	// 	test
 	// } from '../../api/testModule/test.js'
-	import {mapGetters} from 'vuex'
+	import {mapGetters,mapActions,mapMutations} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -193,9 +200,12 @@
 		        this.$refs.hxnb.pageScroll(e);
 		    },
 		computed:{
-			...mapGetters(['platform','host','systemInfo'])
+			...mapGetters(['platform','host','systemInfo','getRootTest']), // 使用根的getter
+			...mapGetters('a',['getTest'])  // 使用a模块的getter
 		},
 		methods: {
+			...mapActions('a',['testAction']), // 使用a模块的action
+			...mapMutations(['changeTest']), // 使用根的mutation
 			onClickBtn(data){
 				//console.log(data);
 				uni.showToast({

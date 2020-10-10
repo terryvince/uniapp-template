@@ -30,7 +30,7 @@
 }
 .flex-column {
   //修改主轴方向为垂直方向
-  flex-direction: column;
+  flex-direction: column!important;
 }
 
 // .row col-1 col-2 ... col-24 , 栅格布局，等分24份, nvue 不支持宽度百分比

@@ -2,9 +2,9 @@
 	require('./envLoader.js');
 	export default {
 		onLaunch: function() {
-			console.log('App Launch',this)
+			console.log('App Launch')
 			// #ifdef APP-PLUS  
-			const _self = this;  
+			const _self = this;
 			const _handlePush = function(message) {
 				plus.nativeUI.toast('push sucess');  
 				console.log(message)

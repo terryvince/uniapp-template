@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import testModule from './testModule.js'
 Vue.use(Vuex)
 
 // const files =  require.context('@/store',true,'/\.js$/')
@@ -23,12 +24,12 @@ let host = ''  // 宿主环境，web 小程序 app
 
 const store = new Vuex.Store({
     state: {   // 全局状态
-		test:'',
+		test:'root',
 		systemInfo,
 		host
 	},
 	getters:{
-		test(state){
+		getRootTest(state){
 			return state.test
 		},
 		systemInfo(state){
@@ -42,8 +43,12 @@ const store = new Vuex.Store({
 		}
 	},
     mutations: {
-		test(state){
-			state.test = 'test'
+		changeTest(state,payload){
+			if(payload){
+				state.test = payload
+				return
+			}
+			state.test = 'changeTest'
 		}
 	},
     actions: {
@@ -52,7 +57,7 @@ const store = new Vuex.Store({
 		}
 	},
 	modules:{   // 模块状态
-		
+		a: testModule
 	}
 })
 
