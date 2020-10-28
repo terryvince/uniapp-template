@@ -110,7 +110,6 @@ $color-map:(
 	padding:0 $content-spacing $content-spacing;
 }
 
-// 角标
 /* #ifndef APP-PLUS-NVUE */
 // 生成 line-top line-bottom等1rpx细线
 $position-list: top,bottom,right,left;
@@ -119,6 +118,7 @@ $position-list: top,bottom,right,left;
 		@include border-1px($pos)
 	}
 }
+// 角标
 .badge{
 	display: inline-block;
 	&.badge-mini{

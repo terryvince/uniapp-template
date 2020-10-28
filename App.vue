@@ -1,6 +1,9 @@
 <script>
 	require('./envLoader.js');
 	export default {
+		globalData:{
+			
+		},
 		onLaunch: function() {
 			console.log('App Launch')
 			// #ifdef APP-PLUS  
