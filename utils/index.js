@@ -99,7 +99,7 @@ export const querySelector = (selector) => new Promise((resolve, reject) => {
  */
 export const objectMap = (origin, map, isKeepOldKey = true) => {
 	if (type(origin) !== 'object' || type(map) !== 'object') {
-	  throw new Error('utils.objectMap: 参数错误')
+	  throw new Error('utils.objectMap: 参数错误, 预期接受一个对象值')
 	}
 	let target = JSON.parse(JSON.stringify(origin))
 	let keys = Object.keys(target);
@@ -115,11 +115,46 @@ export const objectMap = (origin, map, isKeepOldKey = true) => {
 	return target
 }
 
+/**
+ * 深度合并，可以合并多个对象，包括嵌套属性对象，返回新对象
+ * 合并规则：
+ * 1.都是对象，则合并对象
+ * 2.都是数组，则连接数组，调用concat
+ * 3.函数或其他类型，后面的覆盖前面的
+ * @param {object} ob1,ob2,...,obn
+ */
+export function merge(...args) {
+  let target = {}
+  args.forEach(ob=>{
+	if(type(ob)!=='object'){
+		 throw new Error('utils.merge: 参数错误，传入了非对象值!')
+	}
+  })
+  function mergeObject(target,...args){
+	 args.forEach(ob=>{
+	 	  const keys = Object.keys(ob)
+	 	  keys.forEach(k=>{
+	 		  if(type(ob[k]) == 'object' && type(target[k]) == 'object'){  // 对象进行合并
+	 			  mergeObject(target[k], ob[k])
+	 		  }else if(type(ob[k]) == 'array' && type(target[k]) == 'array'){ // 数组则进行连接，不会覆盖
+	 			  target[k] = target[k].concat( JSON.parse(JSON.stringify(ob[k])) )
+	 		  }else{  // functin 或值类型直接覆盖
+	 			  target[k] = ob[k]
+	 		  }
+	 	  })
+	 }) 
+  }
+  mergeObject(target,...args)
+  return target
+}
+
+
 export default {
 	type,
 	deepFilter,
 	removeRepeat,
 	deepClone,
 	querySelector,
-	objectMap
+	objectMap,
+	merge
 }

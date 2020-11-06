@@ -30,5 +30,6 @@ export default {
 		
 		  // 全局添加的方法
 		  Vue.prototype.$http = http //http实例
+		  Vue.prototype.$path = path => process.my_env.STATIC_PATH + path
 	}
 }

@@ -20,7 +20,7 @@ let ENV_VAR = {
 process.my_env = Object.assign(process.env,ENV_VAR,GLOBAL_ENV)
 // #endif
 
-// 构造一个process对象出来，防止http模块报错
+// 构造一个process对象出来，防止nvue引用模块报错
 // #ifdef APP-NVUE
 	processNvue.my_env = Object.assign(processNvue.env,{NODE_ENV:process.env.NODE_ENV},ENV_VAR,GLOBAL_ENV)
 // #endif

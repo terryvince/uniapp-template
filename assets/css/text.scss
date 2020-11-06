@@ -8,14 +8,19 @@
 .txt-italic{
 	font-style: italic;
 }
-// 加粗
-.txt-bold {
-  font-weight: bold;
-}
 // 删除线
 .txt-delete{
 	text-decoration:line-through;
 }
+
+// 设计师字重参考
+.txt-light{font-weight: 300;}
+// Regular (Normal、Book、Roman) 都是400这个粗细
+.txt-normal{font-weight: 400;}
+.txt-medium{font-weight: 500;}
+.txt-bold{font-weight: 700;}
+.txt-heavy{font-weight: 900;}
+.txt-baseline{vertical-align: baseline;}
 
 /* #ifndef APP-PLUS-NVUE */
 // 多行省略（不要设padding，用margin代替，padding会导致溢出部分可见）

@@ -21,6 +21,7 @@ module.exports = {
 	        prependData: `
 						@import "~@/assets/css/variable.scss";
 						@import "~@/assets/css/mixin.scss";
+						@import "~@/assets/css/function.scss";
 						`
 	      }
 	    }

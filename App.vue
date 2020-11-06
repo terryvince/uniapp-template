@@ -6,8 +6,11 @@
 		},
 		onLaunch: function() {
 			console.log('App Launch')
-			// #ifdef APP-PLUS  
+			// #ifdef APP-PLUS 
 			const _self = this;
+			
+			plus.navigator.closeSplashscreen();  // 手动关闭启动页，mainfest中配置，这样可以自定义什么时候关闭启动页，屏蔽掉多次跳转的不良体验
+			
 			const _handlePush = function(message) {
 				plus.nativeUI.toast('push sucess');  
 				console.log(message)

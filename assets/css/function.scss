@@ -1,0 +1,8 @@
+/**
+ * 生成带域名的完整路径
+ * @param {string} $path
+ * @tutorial background:url( path('1.png') ) => background: url('https://img.baidu.com/static/1.png')
+ */
+@function path($path){
+	@return $static-path + $path
+}

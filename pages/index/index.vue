@@ -169,19 +169,20 @@
 			return {
 				navHeight:0,
 				config:{
-					title: '这里是新疆',
-					color: '#ffffff',
+					title: ['这里是新疆','欢迎您！'],
+					color: '#fff',
 					//背景颜色;参数一：透明度（0-1）;参数二：背景颜色（array则为线性渐变，string为单色背景）
 					backgroundColor: [1,['#a9a1ff','#6970ff','#ff55ff','#ff9999']],
 					// 滑动屏幕后切换颜色，注意颜色为数组时长度必须一样，还有使用滑动切换必须监听 onPageScroll 事件
-					slideBackgroundColor: [.6,["#ff9999", "#ff55ff", "#6970ff", "#a9a1ff"]],
+					slideBackgroundColor: [1,["#ff9999", "#ff55ff", "#6970ff", "#a9a1ff"]],
 					// 状态栏 ，数组则为滑动变色, 不设则跟随导航条背景色
 					statusBarBackground:['',''],
+					leftButton:[],
 					rightButton:[{
 						key: 'btn3',
 						icon: '&#xe6eb;',
 						position: 'left',
-						color:'#ffffff'
+						color:'#fff'
 					}],
 				},
 			}
@@ -197,8 +198,8 @@
 		},
 		onPageScroll(e) {
 		        // 重点，用到滑动切换必须加上
-		        this.$refs.hxnb.pageScroll(e);
-		    },
+			this.$refs.hxnb.pageScroll(e);
+		},
 		computed:{
 			...mapGetters(['platform','host','systemInfo','getRootTest']), // 使用根的getter
 			...mapGetters('a',['getTest'])  // 使用a模块的getter

@@ -56,7 +56,7 @@
 				<view class="hx-navbar__content__main_center" v-if="!conf.search && !conf.maxSlot">
 					<view class="hx-navbar__content__main_center_flex"></view>
 					<view class="hx-navbar__content__main_center_txt" >
-						<text class="hx_font_size hx_text_overflow" :style="{color: txtColor}" v-if="!conf.centerSlot && conf.title">{{conf.title}}</text>
+						<text class="hx_font_size hx_text_overflow" :style="{color: txtColor}" v-if="!conf.centerSlot && title">{{title}}</text>
 						
 						<slot name="centerSwitch" v-if="conf.centerSlotSwitch && slotSwitchOpacity == 0"/>
 						<slot name="center" v-else/>
@@ -82,9 +82,9 @@
 				<view class="hx-navbar__content__main_left" :style="{'padding': conf.back ||conf.leftSlot ? '0' : '0 9px 0 13px;' }"  v-if="conf.leftButton">
 					<block v-for="(btn,index) in conf.leftButton" :key="index">
 						<view class="hx-navbar__content__main_left_btn" @tap="onClickBtn(btn)" :class="{'hx-navbar__btntran':bgTransparent == 0}">
-							<text v-if="btn.position && btn.position == 'left'" class="hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : txtColor,marginRight:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text>
+							<text v-if="btn.position && btn.position == 'left'" class="hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : '',marginRight:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text>
 							<text class="hx-navbar__content__main_lefticon_txt hx_font_size" :style="{color:btn.color ? btn.color : txtColor}"  v-if="btn.txt">{{btn.txt}}</text>
-							<text v-if="!btn.position || btn.position != 'left'" class="hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : txtColor,marginLeft:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text>
+							<text v-if="!btn.position || btn.position != 'left'" class="hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : '',marginLeft:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text>
 						</view>
 					</block>
 				</view>
@@ -110,9 +110,9 @@
 				<view class="hx-navbar__content__main_right" :style="{padding: conf.rightSlot ? '0' : '0 13px 0 9px;'}" v-if="conf.rightButton">
 					<block v-for="(btn,index) in conf.rightButton" :key="index">
 					<view class="hx-navbar__content__main_right_btn" @tap="onClickBtn(btn)" :class="{'hx-navbar__btntran':bgTransparent == 0}">
-						<text v-if="btn.position && btn.position == 'left'" class="hxicon hx-navbar__content__main_right_icon hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : txtColor,marginRight:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text>
+						<text v-if="btn.position && btn.position == 'left'" class="hxicon hx-navbar__content__main_right_icon hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : '',marginRight:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text>
 						<text class="hx-navbar__content__main_right_txt hx_font_size" :style="{color:btn.color ? btn.color : txtColor}" v-if="btn.txt">{{btn.txt}}</text>
-						<text v-if="!btn.position || btn.position != 'left'" class="hxicon hx-navbar__content__main_right_icon hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : txtColor,marginLeft:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text>
+						<text v-if="!btn.position || btn.position != 'left'" class="hxicon hx-navbar__content__main_right_icon hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : '',marginLeft:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text>
 					</view>
 					</block>
 				</view>
@@ -157,7 +157,7 @@
 		},
 		data() {
 			return {
-				
+				title: '',
 				backgroundColorRgba: '',
 				backgroundColorRgb: 'rgb(222,222,222)',
 				backgroundImage: null,
@@ -275,10 +275,6 @@
 				default: ()=>({
 					
 				})
-			},
-			navHeight:{
-				type: Number,
-				default:44
 			}
 		},
 		computed:{
@@ -315,7 +311,15 @@
 			
 		},
 		watch: {
-			
+			// 'conf.leftButton': {
+			// 	handler(newVal, oldVal) {
+			// 		console.log("出发了")
+			// 		//this.init()
+			// 		this.conf.leftButton = newVal
+			// 	},
+			// 	// 启用深度监听
+			// 	deep: true
+			// }
 		},
 		methods: {
 			iconHandle(icon){
@@ -336,6 +340,14 @@
 					uni.setNavigationBarTitle({
 					    title: that.conf.title
 					});
+				}
+				// 标题
+				if(that.conf.title){
+					if(typeof that.conf.title == 'object' && that.conf.title.length == 2){
+						that.title = that.conf.title[0];
+					}else{
+						that.title = that.conf.title;
+					}
 				}
 				
 				// 状态栏背景颜色
@@ -436,7 +448,6 @@
 				this.$emit('clickBtn',e)
 			},
 			pageScroll(e){
-				this.$emit('update:navHeight',parseInt(this.navbarHeight));
 				var that = this;
 				const st = parseFloat(e.scrollTop.toFixed(2));
 				// 滑动距离
@@ -444,6 +455,17 @@
 				// 过度颜色数组用到的整数滑动距离
 				let a = Math.round(st);
 				if(a > 0){a -= 1}else{a=0}
+				
+				// 标题
+				if(that.conf.title && typeof that.conf.title == 'object' && that.conf.title.length == 2){
+					if (st <= slideHeight) {
+						that.title = that.conf.title[0];
+					}else{
+						that.title = that.conf.title[1];
+					}
+					
+				}
+				
 				
 				// 文字颜色滑动变色
 				if(that.conf.color && typeof that.conf.color == 'object' && that.conf.color.length == 2){

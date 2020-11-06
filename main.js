@@ -9,6 +9,12 @@ import App from './App'
 import store from './store/index.js'
 import myPlugin from './vueOption/plugin.js'
 import myRouter from './router/index.js'  // 不能叫router，h5端会和内置的vue-router命名冲突
+import Socket from './libs/socket.js'
+
+let socket = new Socket({
+	url:'wss://localhost:8080',
+	debug: true
+})
 
 Vue.config.productionTip = false
 

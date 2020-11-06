@@ -6,9 +6,8 @@ const {log,error,warn}  = Print({
 	style:'warning'
 })
 /**
- * 该类已全局导入，可以直接使用无需import，注意nvue环境需要手动导入
  * @param {Object} option  构造函数选项 =>
- *					@param {date} expire 数据过期时间，会在get的时候检查，过期会被删除, 默认30天后过期
+ *					@param {date} expireDefault 插入数据时如果未设置过期时间，则会读取(当前时间+expireDefault)的时间作为过期时间，默认是30天后过期
  * 					@param {string} scope 作用域，统一给存储的key增加私有前缀，防止h5同域名下，多站点存取冲突
  * 如果存储超出限制大小，会自动清除最旧的数据，直到能够存储为止
  * 
@@ -25,20 +24,23 @@ const {log,error,warn}  = Print({
  */
 function Store(option){
 	log('存储初始化...')
-	this._option = option || {expire: 0,scope:'__store__'}
+	this._option = Object.assign({expireDefault: 30*24*60*60*1000, scope:'__store__'},option)
 	this._info = {}
-	// 设置默认统一过期时间
-	this._option.expire = getStorageSync(this._option.scope+'expire')
-	if(!this._option.expire){
-		this._option.expire = +new Date() + (30*24*60*60*1000)
-		setStorageSync(this._option.scope+'expire',this._option.expire)
+	if(this._option.expireDefault && typeof this._option.expireDefault != 'number'){
+		throw new Error('STORE ERROR: 请传入正确的时间戳！')
 	}
-	log(`设置数据默认过期时间，已初始化为${new Date(this._option.expire).toLocaleString()}后过期...`)
 	Object.defineProperty(this,'_info',{
 		get(){
 			return getStorageInfoSync()
 		}
 	})
+	// 设置一个动态默认过期时间属性，获取当前时间之后的30天
+	Object.defineProperty(this._option,'expire',{
+		get(){
+			return +new Date() + this.option.expireDefault
+		}
+	})
+	log('存储系统初始化成功！')
 }
 
 Store.prototype.get = async function({key,...rest}){
@@ -164,7 +166,5 @@ export const getLength = function(str) {
 }
 
 const store = new Store()
-
-log('存储系统初始化成功')
 
 export default store
