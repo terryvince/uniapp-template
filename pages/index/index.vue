@@ -102,14 +102,14 @@
 		</view>
 		<!-- <image class="logo" src="/static/logo.png"></image> -->
 		<view class="text-area flex-wrap">
-			<view class="rect bg-primary top-30 row row-center padding-beside-20">
+			<view class="rect bg-primary top-30 flex flex-center padding-beside-20">
 				<text class="color-white fs-32 txt-ellipsis row-2">
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore sequi voluptates dolorem obcaecati accusantium
 					pariatur corrupti accusamus earum fuga nostrum? Et iure doloremque labore doloribus nesciunt aut! Modi sequi
 					optio.
 				</text>
 			</view>
-			<view class="row row-center top-30">
+			<view class="flex flex-center top-30">
 				<checkbox-group name="">
 					<label>
 						<checkbox value="1" /><text>hello</text>
@@ -119,7 +119,7 @@
 					</label>
 				</checkbox-group>
 			</view>
-			<view class="row row-center  top-30">
+			<view class="flex flex-center  top-30">
 				<radio-group name="">
 					<label>
 						<radio value="1" /><text>hello</text>
@@ -129,12 +129,12 @@
 					</label>
 				</radio-group>
 			</view>
-			<view class="rect-list row top-30 gutter-15">
+			<view class="rect-list flex top-30 gutter-15">
 				<view class="col-6">
 					测试边距
 				</view>
 				<view class="col-18">
-					<view class="row row-main-end gutter-15">
+					<view class="flex flex-main-end gutter-15">
 						<view class="col-6">测试边距</view>
 						<view class="col-6">测试边距</view>
 						<view class="col-6">测试边距</view>
@@ -150,7 +150,7 @@
 			</view>
 		</view>
 		<!--  -->
-		<view class="content-block row row-center flex-column">
+		<view class="content-block flex flex-center flex-column">
 			<text>state a/test: {{getTest}}</text>
 			<text class="top-10">state root/test: {{getRootTest}}</text>
 			<button @click="testAction()" type="default" class="top-10">点击改变模块a/test状态</button>

@@ -27,3 +27,9 @@ $content-spacing: 20rpx; // 内容边距
 $module-spacing: 60rpx; // 模块边距
 
 $static-path: 'https://img.baidu.com/static/'
+
+// 导出
+:export {
+  staticPath: $static-path;
+  colorPrimary: $color-primary;
+}

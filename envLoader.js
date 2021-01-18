@@ -1,5 +1,6 @@
 /* 注入环境变量
  * 有特定环境需求改NODE_ENV，默认不需要改，运行加载.env.dev.js的环境变量，发行加载.env.prod.js的环境变量
+ * 使用nvue需要重新导入该文件
  * */
 
 const NODE_ENV = ''; // test:测试环境 | pre:预发布环境 

@@ -2,6 +2,7 @@ import filters from './filter.js'
 import mixin from './mixin.js'
 import http from '@/libs/http.js'
 import hxNavbar from "@/components/hx-navbar/hx-navbar"
+import styleVariable from "@/assets/css/variable.scss"
 // 自定义插件注入全局属性或方法
 export default {
 	install(Vue,options){
@@ -30,6 +31,7 @@ export default {
 		
 		  // 全局添加的方法
 		  Vue.prototype.$http = http //http实例
-		  Vue.prototype.$path = path => process.my_env.STATIC_PATH + path
+		  
+		  Vue.prototype.$path = path => styleVariable.staticPath + path
 	}
 }

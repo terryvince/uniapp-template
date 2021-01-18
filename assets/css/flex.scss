@@ -34,7 +34,7 @@
 }
 
 // .row col-1 col-2 ... col-24 , 栅格布局，等分24份, nvue 不支持宽度百分比
-.row{
+.flex{
 	/* #ifndef APP-PLUS-NVUE */
 	display: flex;
 	width: 100%;
@@ -64,36 +64,37 @@
 		}
 	}
 }
+
 /* #endif */
-.row-center{
+.flex-center{
 	justify-content: center;
 	align-items: center;
 }
 // 主轴对齐方式（水平）
-.row-main-start{
+.flex-main-start{
 	justify-content: flex-start; // 左对齐
 }
-.row-main-end{
+.flex-main-end{
 	justify-content: flex-end;	// 右对齐
 }
-.row-main-center{
+.flex-main-center{
 	justify-content: center; // 居中对齐
 }
-.row-main-between{
+.flex-main-between{
 	justify-content: space-between; // 两端对齐
 }
 // 交叉轴对齐方式（纵向）
-.row-cross-start{
+.flex-cross-start{
 	align-items: flex-start;  //上对齐
 }
-.row-cross-center{
+.flex-cross-center{
 	align-items: center; //中
 }
-.row-cross-end{
+.flex-cross-end{
 	align-items: flex-end; // 下对齐
 }
 // 高度铺满
-.row-cross-stretch{
+.flex-cross-stretch{
 	align-items: stretch;
 }
 @for $value from 1 through 24 { // col-1 col-2 ... col-24

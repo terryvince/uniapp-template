@@ -1,5 +1,5 @@
 <template>
-	<view class="row row-center">
+	<view class="flex flex-center">
 		<text>this is  nvue page</text>
 		<text class="left-10">1111</text>
 		<text class="txt-wrap width-full txt-ellipsis txt-row-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus earum rerum dolore ipsum corporis repellendus velit aliquid laboriosam debitis officia ut cupiditate voluptatem inventore quos dolores placeat sed excepturi modi!</text>
